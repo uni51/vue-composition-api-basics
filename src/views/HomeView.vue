@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>{{ appTitle }}:</h2>
+    <h2>{{ appTitle }}</h2>
 
     <h3>{{ counterData.title }}:</h3>
 
@@ -22,14 +22,23 @@
 </template>
 
 <script setup>
-import { reactive, computed } from "vue";
+import { reactive, computed, watch } from "vue";
 
-const appTitle = "My OK Counter App";
+const appTitle = "My Ok Counter App";
 
 const counterData = reactive({
   count: 0,
-  title: "MyCounter",
+  title: "My Counter",
 });
+
+watch(
+  () => counterData.count,
+  (newCount) => {
+    if (newCount === 20) {
+      alert("Way to go! You made it to 20!!");
+    }
+  }
+);
 
 const oddOrEven = computed(() => {
   if (counterData.count % 2 === 0) return "even";
@@ -37,7 +46,6 @@ const oddOrEven = computed(() => {
 });
 
 const increaseCounter = (amount, e) => {
-  console.log(e);
   counterData.count += amount;
 };
 
@@ -49,13 +57,23 @@ const decreaseCounter = (amount) => {
 <!--
 <script>
 export default {
+  data() {
+    return {
+      count: 0
+    }
+  },
   computed: {
     myComputedProperty() {
       // perform logic based on a data property
-      return "my result";
-    },
+      return 'my result'
+    }
   },
-};
+  watch: {
+    count(newCount, oldCount) {
+      if (newCount == 20) alert('asdfasd')
+    }
+  }
+}
 </script>
 -->
 
