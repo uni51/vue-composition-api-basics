@@ -22,7 +22,15 @@
 </template>
 
 <script setup>
-import { reactive, computed, watch } from "vue";
+import {
+  reactive,
+  computed,
+  watch,
+  onBeforeMount,
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+} from "vue";
 
 const appTitle = "My Ok Counter App";
 
@@ -52,6 +60,22 @@ const increaseCounter = (amount, e) => {
 const decreaseCounter = (amount) => {
   counterData.count -= amount;
 };
+
+onBeforeMount(() => {
+  console.log("onBeforeMount");
+});
+
+onMounted(() => {
+  console.log("onMounted");
+});
+
+onBeforeUnmount(() => {
+  console.log("onBeforeUnmount");
+});
+
+onUnmounted(() => {
+  console.log("onUnmounted");
+});
 </script>
 
 <!--
@@ -59,21 +83,27 @@ const decreaseCounter = (amount) => {
 export default {
   data() {
     return {
-      count: 0
-    }
+      count: 0,
+    };
   },
   computed: {
     myComputedProperty() {
       // perform logic based on a data property
-      return 'my result'
-    }
+      return "my result";
+    },
   },
   watch: {
     count(newCount, oldCount) {
-      if (newCount == 20) alert('asdfasd')
-    }
-  }
-}
+      if (newCount == 20) alert("asdfasd");
+    },
+  },
+  mounted() {
+    console.log("mounted");
+  },
+  unmounted() {
+    console.log("unmounted");
+  },
+};
 </script>
 -->
 
